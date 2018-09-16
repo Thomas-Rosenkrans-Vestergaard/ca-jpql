@@ -4,7 +4,7 @@ import com.tvestergaard.jpql.entities.Semester;
 
 import java.util.List;
 
-public interface SemesterRepository extends TransactionAware
+public interface SemesterRepository
 {
 
     /**

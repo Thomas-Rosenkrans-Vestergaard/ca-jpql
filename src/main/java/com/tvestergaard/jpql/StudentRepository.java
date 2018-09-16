@@ -5,7 +5,7 @@ import com.tvestergaard.jpql.entities.Student;
 
 import java.util.List;
 
-public interface StudentRepository extends TransactionAware
+public interface StudentRepository
 {
 
     /**
