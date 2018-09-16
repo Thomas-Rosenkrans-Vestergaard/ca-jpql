@@ -3,6 +3,8 @@ package com.tvestergaard.jpql;
 import com.tvestergaard.jpql.entities.Teacher;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import java.util.List;
 
 public class TransactionalTeacherRepository extends AbstractTransactionalRepository implements TeacherRepository
 {
@@ -27,6 +29,33 @@ public class TransactionalTeacherRepository extends AbstractTransactionalReposit
     }
 
     /**
+     * Finds the teacher with the provided id.
+     *
+     * @param id The id of the teacher to find.
+     * @return The thecher with the provided id, {@code null} when no such entity exists.
+     */
+    @Override public Teacher find(long id)
+    {
+        try {
+            return entityManager.createNamedQuery("Teacher.findById", Teacher.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Finds all the teachers in the system.
+     *
+     * @return A list of all the teachers in the system.
+     */
+    @Override public List<Teacher> all()
+    {
+        return entityManager.createNamedQuery("Teacher.findAll", Teacher.class).getResultList();
+    }
+
+    /**
      * Returns the teacher who teaches the most semesters.
      *
      * @return The teacher who teaches the most semesters.
@@ -40,7 +69,6 @@ public class TransactionalTeacherRepository extends AbstractTransactionalReposit
                 .setMaxResults(1)
                 .getSingleResult();
     }
-
 
     /**
      * Closes the {@code EntityManager}.
