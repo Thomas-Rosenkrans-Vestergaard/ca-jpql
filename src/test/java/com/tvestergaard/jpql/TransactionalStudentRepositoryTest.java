@@ -147,7 +147,11 @@ public class TransactionalStudentRepositoryTest
     @Test
     public void getStudentInfoList()
     {
+        List<StudentInfo> studentInfos = instance.getStudentInfo();
 
+        assertEquals(6, studentInfos.size());
+        assertEquals("Jens Jensen", studentInfos.get(0).fullName);
+        assertEquals("Anders And", studentInfos.get(1).fullName);
     }
 
     @Test
