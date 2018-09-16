@@ -25,6 +25,7 @@ public class TransactionalTeacherRepositoryTest
     {
         manager = factory.createEntityManager();
         instance = new TransactionalTeacherRepository(manager, TransactionStrategy.ROLLBACK);
+        instance.begin();
     }
 
     @After

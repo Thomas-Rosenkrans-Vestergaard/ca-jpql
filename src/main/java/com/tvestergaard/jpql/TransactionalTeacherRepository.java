@@ -25,7 +25,6 @@ public class TransactionalTeacherRepository extends AbstractTransactionalReposit
         super(null, onClose);
         this.entityManager = manager;
         this.entityTransaction = this.entityManager.getTransaction();
-        begin();
     }
 
     /**

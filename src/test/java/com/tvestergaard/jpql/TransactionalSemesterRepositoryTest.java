@@ -24,6 +24,7 @@ public class TransactionalSemesterRepositoryTest
     public void setUp() throws Exception
     {
         instance = new TransactionalSemesterRepository(emf.createEntityManager(), TransactionStrategy.ROLLBACK);
+        instance.begin();
     }
 
     @After

@@ -27,6 +27,7 @@ public class TransactionalStudentRepositoryTest
     {
         manager = factory.createEntityManager();
         instance = new TransactionalStudentRepository(manager, TransactionStrategy.ROLLBACK);
+        instance.begin();
     }
 
     @After
@@ -146,6 +147,7 @@ public class TransactionalStudentRepositoryTest
     @Test
     public void getStudentInfoList()
     {
+
     }
 
     @Test
