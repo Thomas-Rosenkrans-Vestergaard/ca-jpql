@@ -28,6 +28,23 @@ public class TransactionalSemesterRepository extends AbstractTransactionalReposi
     }
 
     /**
+     * Creates (inserts) a new semester.
+     *
+     * @param description The description of the new semester.
+     * @param name        The name of the new semester.
+     * @return The newly created semester.
+     */
+    @Override public Semester create(String description, String name)
+    {
+        Semester semester = new Semester();
+        semester.setDescription(description);
+        semester.setName(name);
+        entityManager.persist(semester);
+
+        return semester;
+    }
+
+    /**
      * Finds the semester with the provided id.
      *
      * @param id The id of the semester to find.

@@ -35,6 +35,13 @@ public class TransactionalSemesterRepositoryTest
     }
 
     @Test
+    public void create()
+    {
+        Semester created = instance.create("Description", "Name");
+        assertEquals(instance.find(created.getId()), created);
+    }
+
+    @Test
     public void find()
     {
         Semester find = instance.find(1);
