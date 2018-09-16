@@ -151,7 +151,7 @@ public class TransactionalStudentRepositoryTest
 
         assertEquals(6, studentInfos.size());
         assertEquals("Jens Jensen", studentInfos.get(0).fullName);
-        assertEquals("Anders And", studentInfos.get(1).fullName);
+        assertEquals("Anders And", studentInfos.get(5).fullName);
     }
 
     @Test

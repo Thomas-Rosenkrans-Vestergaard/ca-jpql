@@ -10,8 +10,6 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ca-jpql-test"/>
             <property name="javax.persistence.jdbc.user" value="thomas"/>
             <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="javax.persistence.schema-generation.create-source" value="script"/>
-            <property name="javax.persistence.schema-generation.create-script-source" value="structure.sql"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
             <property name="hibernate.show_sql" value="true"/>

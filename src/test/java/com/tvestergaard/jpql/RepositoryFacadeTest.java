@@ -16,8 +16,8 @@ public class RepositoryFacadeTest
 {
 
     private final EntityManagerFactory factory = Persistence.createEntityManagerFactory("ca-jpql-test-pu");
-    private       EntityManager        entityManager;
-    private       RepositoryFacade     instance;
+    private EntityManager    entityManager;
+    private RepositoryFacade instance;
 
     @Before
     public void setUp() throws Exception
@@ -34,13 +34,21 @@ public class RepositoryFacadeTest
             Student  createdStudent  = students.createStudent("TransactionalStuA", "TransactionalStuB", createdSemester);
         });
 
-        assertNotNull(entityManager.createNamedQuery("Semester.findByDescription")
-                              .setParameter("description", "TransactionalSemA")
-                              .getSingleResult());
+        Semester foundSemester = entityManager.createNamedQuery("Semester.findByDescription", Semester.class)
+                                              .setParameter("description", "TransactionalSemA")
+                                              .getSingleResult();
 
-        assertNotNull(entityManager.createNamedQuery("Student.findByFirstName")
-                              .setParameter("firstName", "TransactionalStuA")
-                              .getSingleResult());
+        Student foundStudent = entityManager.createNamedQuery("Student.findByFirstName", Student.class)
+                                            .setParameter("firstName", "TransactionalStuA")
+                                            .getSingleResult();
+
+        assertNotNull(foundSemester);
+        assertNotNull(foundStudent);
+
+        // Clean database to not effect rest of suite
+        entityManager.remove(foundStudent);
+        entityManager.remove(foundSemester);
+        entityManager.getTransaction().commit();
     }
 
     @Test
@@ -59,8 +67,8 @@ public class RepositoryFacadeTest
 
         try {
             entityManager.createNamedQuery("Semester.findByDescription", Semester.class)
-                    .setParameter("description", "TransactionalSemA")
-                    .getSingleResult();
+                         .setParameter("description", "TransactionalSemA")
+                         .getSingleResult();
             fail("Should not exist");
         } catch (Exception e) {
 
@@ -68,8 +76,8 @@ public class RepositoryFacadeTest
 
         try {
             entityManager.createNamedQuery("Student.findByFirstName", Student.class)
-                    .setParameter("firstName", "TransactionalStuA")
-                    .getSingleResult();
+                         .setParameter("firstName", "TransactionalStuA")
+                         .getSingleResult();
             fail("Should not exist");
         } catch (Exception e) {
 
